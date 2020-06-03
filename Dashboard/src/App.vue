@@ -1,41 +1,60 @@
 <template>
-	<div id="app">
-		
-		<!--<Home msg="Hello world!" />-->
-		<!--<CyklusTime></CyklusTime>-->
-		<!--<SmoothLineTest></SmoothLineTest>-->
-		<Momentkurve></Momentkurve>
-		<!--<LineChart></LineChart>-->
-		<!--<Histogramkurve></Histogramkurve>-->
-		
-		<!--<h3>Hej med dig</h3>
-		<button class="btn waves-effect waves-light btn-large">
-			Click me!
-		</button>-->-->
-	</div>
+  <v-app>
+    <v-app-bar
+      app
+      color="primary"
+      dark
+    >
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          class="shrink mr-2"
+          contain
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
+          transition="scale-transition"
+          width="40"
+        />
+
+        <v-img
+          alt="Vuetify Name"
+          class="shrink mt-1 hidden-sm-and-down"
+          contain
+          min-width="100"
+          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
+          width="100"
+        />
+      </div>
+
+      <v-spacer></v-spacer>
+
+      <v-btn
+        href="https://github.com/vuetifyjs/vuetify/releases/latest"
+        target="_blank"
+        text
+      >
+        <span class="mr-2">Latest Release</span>
+        <v-icon>mdi-open-in-new</v-icon>
+      </v-btn>
+    </v-app-bar>
+
+    <v-content>
+      <HelloWorld/>
+    </v-content>
+  </v-app>
 </template>
 
 <script>
-	import Home from './components/Home.vue'
-	import LineChart from './components/LineChart.vue'
-	import Momentkurve from './components/Momentkurve.vue'
-	import CyklusTime from './components/CyklusTime.vue'
-	import SmoothLineTest from './components/SmoothLineTest.vue'
-	import Histogramkurve from './components/Histogramkurve.vue'
+import HelloWorld from './components/HelloWorld';
 
-	export default {
-		name: 'app',
-		components: {
-			Home,
-			LineChart,
-			Momentkurve,
-			CyklusTime,
-			SmoothLineTest,
-			Histogramkurve
-		}
-	};
+export default {
+  name: 'App',
+
+  components: {
+    HelloWorld,
+  },
+
+  data: () => ({
+    //
+  }),
+};
 </script>
-
-<style>
-</style>
-

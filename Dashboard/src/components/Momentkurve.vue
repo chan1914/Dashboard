@@ -11,9 +11,6 @@
 
 	export default {
 		name: 'Momentkurve',
-		created() {
-
-		},
 		mounted() {
 			am4core.ready(function () {
 
@@ -23,62 +20,65 @@
 
 				// Create chart instance
 				var chart = am4core.create("chartdiv", am4charts.XYChart);
-				chart.paddingRight = 20;
+				//chart.paddingRight = 20;
+
+				// Chart data external
+				chart.dataSource.url = "https://raw.githubusercontent.com/chan1914/Dashboard/master/Dashboard_data%20-%20csv.csv";
+				chart.dataSource.parser = new am4core.CSVParser();
+				chart.dataSource.parser.options.useColumnNames = true;
+
+				chart.data = [{
+					"torque_log_values_id": "1",
+					"torque_values": 501
+				}, {
+					"torque_log_values_id": "2",
+					"torque_values": 301
+				}, {
+					"torque_log_values_id": "3",
+					"torque_values": 201
+				}, {
+					"torque_log_values_id": "3",
+					"torque_values": 165
+				}, {
+					"torque_log_values_id": "4",
+					"torque_values": 139
+				}, {
+					"torque_log_values_id": "5",
+					"torque_values": 128
+				}, {
+					"torque_log_values_id": "6",
+					"torque_values": 99
+				}, {
+					"torque_log_values_id": "7",
+					"torque_values": 60
+				}, {
+					"torque_log_values_id": "2",
+					"torque_values": 50
+				}];
 
 				// Create axes
-				var xAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-				xAxis.dataFields.label = "Milliseconds";
+				var idAxis = chart.xAxes.push(new am4charts.ValueAxis());
+				idAxis.dataFields = "torque_log_values_id";
+				idAxis.title.text = "Miliseconds";
+				idAxis.renderer.grid.template.location = 0.5;
+				idAxis.startLocation = 0.5;
+				idAxis.endLocation = 0.5;
+				idAxis.min = 0;
+				idAxis.max = 10;
 
-				var yAxis = chart.yAxes.push(new am4charts.ValueAxis())
-				yAxis.dataFields.label = "NewtonMeter";
+
+				var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+				valueAxis.dataFields = "torque_values";
+				valueAxis.title.text = "NewtonMeter";
 
 				// Create series
-				var series = chart.data.series.push(new am4charts.LineSeries());
-				series.dataFields.xAxis = "torque_log_values_id";
-				series.dataFields.yAxis = "torque_values";
-				series.tooltipText = "{torque_values}"
-				
+				var series1 = chart.data.series.push(new am4charts.LineSeries());
+				series1.dataFields.valueY = "torque_values";
+				series1.dataFields.valueX = "torque_log_values_id";
+				series1.bullets.push(new am4charts.CircleBullet());
 
-				// Make bullets grow on hover
-				var bullet = series.bullets.push(new am4charts.CircleBullet());
-				bullet.circle.strokeWidth = 2;
-				bullet.circle.radius = 4;
-				bullet.circle.fill = am4core.color("#f3e3c2");
-
-				var bullethover = bullet.states.create("hover");
-				bullethover.properties.scale = 1.3;
-
-
-
-				//Datasets for momentkurve
-				chart.data = [{
-					"torque_log_values_id": 0,
-					"torque_values": 0
-				}, {
-					"torque_log_values_id": 0,
-					"torque_values": 5
-				}, {
-					"torque_log_values_id": 3,
-					"torque_values": 20
-				}, {
-					"torque_log_values_id": 8,
-					"torque_values": 40
-				}, {
-					"torque_log_values_id": 15,
-					"torque_values": 70
-				}, {
-					"torque_log_values_id": 25,
-					"torque_values": 63
-				}, {
-					"torque_log_values_id": 50,
-					"torque_values": 35
-				}, {
-					"torque_log_values_id": 70,
-					"torque_values": 23
-				}, {
-					"torque_log_values_id": 100,
-					"torque_values": 14
-				}];
+				// Add legend
+				chart.legend = new am4charts.Legend();
 
 			});
 		}
@@ -88,8 +88,10 @@
 
 
 <style>
+	
 	#chartdiv {
 		width: 100%;
 		height: 500px;
 	}
+	
 </style>
